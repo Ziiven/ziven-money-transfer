@@ -1,0 +1,30 @@
+ziven-transfer-money:
+  forum:
+    transfer-list-load-more: 读取更多
+    transfer-list-empty: 没有找到转账记录
+    transfer-list-id: ID
+    transfer-list-type: 类型
+    transfer-list-from-user: 转账用户
+    transfer-list-target-user: 目标用户
+    transfer-list-assign-at: 转账日期
+    transfer-list-transfer-amount: 转账金额
+    transfer-money: 转账
+    transfer-money-success: 转账成功
+    transfer-money-history: 转账历史
+    transfer-money-to: "向 {username} 转账"
+    transfer-money-in: 转入
+    transfer-money-out: 转出
+    transfered-money-to: "转了{money}给"
+    current-money-amount: 当前拥有：
+    ok: 确定
+    cancel: 取消
+    transfer-error: 转账错误
+    transfer-error-no-permission: 您没有权限
+    transfer-error-insufficient-fund: 您的资金不足
+    receive-transfer-from-user: 收到其他用户转账
+    notifications:
+      user-transfer-money-to-you: "{username} 向您转账"
+      user-transfer-money-details: "向您支付 {cost}，转账ID：{id}"
+  admin:
+    permission:
+      allow_use_transfer_money: 允许使用转账
