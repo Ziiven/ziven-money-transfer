@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) 
 
-A [Flarum](http://flarum.org) extension. A Flarum extension. Allow user to transfer money to other users.  
+A [Flarum](http://flarum.org) extension. Allow user to transfer money to other users.  
 一个Flarum扩展。允许用户转账给其他用户。  
 
 ### Required Extension
