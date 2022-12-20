@@ -14,13 +14,13 @@ A [Flarum](http://flarum.org) extension. Allow user to transfer money to other u
 Install with composer:
 
 ```sh
-composer require ziiven/transfer-money
+composer require ziiven/money-transfer
 ```
 
 ### Updating
 
 ```sh
-composer update ziiven/transfer-money
+composer update ziiven/money-transfer
 php flarum migrate
 php flarum cache:clear
 ```
@@ -28,7 +28,7 @@ php flarum cache:clear
 ### Links
 
 - [Github](https://github.com/Ziiven/ziven-money-transfer)
-- [Packagist](https://packagist.org/packages/ziiven/ziven-money-transfer)
+- [Packagist](https://packagist.org/packages/ziiven/money-transfer)
 
 ### ScreenShot
 ![1671343153193](https://user-images.githubusercontent.com/29644610/208283988-f67f2a68-55b1-40ac-8330-482cb0b1b36a.jpg)
