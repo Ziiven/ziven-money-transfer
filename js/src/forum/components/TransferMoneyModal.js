@@ -54,7 +54,7 @@ export default class TransferMoneyModal extends Modal {
 
           <div className="Form-group">
             <label>{app.translator.trans('ziven-transfer-money.forum.current-money-amount')}{this.moneyName.replace('[money]', app.session.user.attribute("money"))}</label>
-            <input id="moneyTransferInput" required className="FormControl" type="number" step="any" min="0" oninput={(e) => this.moneyTransferChanged()} />
+            <input id="moneyTransferInput" placeholder={app.translator.trans('ziven-transfer-money.forum.transfer-money-input-placeholder')} required className="FormControl" type="number" step="any" min="0" oninput={(e) => this.moneyTransferChanged()} />
             <div style="padding-top:10px">{app.translator.trans('ziven-transfer-money.forum.need-money-amount')}<span id="needMoneyContainer">{this.moneyName.replace('[money]', this.needMoney())}</span></div>
           </div>
 
@@ -89,7 +89,12 @@ export default class TransferMoneyModal extends Modal {
   }
 
   getTotalNeedMoney(){
-    const moneyTransferValue = parseFloat($("#moneyTransferInput").val());
+    let moneyTransferValue = parseFloat($("#moneyTransferInput").val());
+
+    if(isNaN(moneyTransferValue)){
+      moneyTransferValue = 0;
+    }
+
     return Object.keys(this.selectedUsers).length*moneyTransferValue;
   }
 

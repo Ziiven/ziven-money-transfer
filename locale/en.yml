@@ -22,6 +22,7 @@ ziven-transfer-money:
     transfer-money-notes: Notes (Optional)
     transfer-money-search-user-placeholder: Typing first three characters of user
     transfer-money-search-user-empty: No users found
+    transfer-money-input-placeholder: Enter the transfer amount
     transfered-money-to: "transfered {money} to"
     current-money-amount: "Current money: "
     need-money-amount: "Total transfer money: "

@@ -22,6 +22,7 @@ ziven-transfer-money:
     transfer-money-notes: 附言（选填）
     transfer-money-search-user-placeholder: 请输入用户名（至少前3位）
     transfer-money-search-user-empty: 没有找到用户
+    transfer-money-input-placeholder: 请输入转账金额
     transfered-money-to: "转了{money}给"
     current-money-amount: 当前拥有：
     need-money-amount: 总共需要：
