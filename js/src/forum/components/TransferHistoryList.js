@@ -24,21 +24,13 @@ export default class WarningList extends Component {
 
     return (
       <div>
-        <div style="padding-bottom:30px; font-size: 24px;font-weight: bold;">
+        <div style="padding-bottom:10px; font-size: 24px;font-weight: bold;">
           {app.translator.trans("ziven-transfer-money.forum.transfer-money-history")}
-        </div>
-        <div style="display: flex;font-weight: bold;font-size: 14px;padding-bottom:20px">
-          <div style="width:70px">{app.translator.trans("ziven-transfer-money.forum.transfer-list-id")}</div>
-          <div style="width:85px">{app.translator.trans("ziven-transfer-money.forum.transfer-list-type")}</div>
-          <div style="width:190px">{app.translator.trans("ziven-transfer-money.forum.transfer-list-from-user")}</div>
-          <div style="width:190px">{app.translator.trans("ziven-transfer-money.forum.transfer-list-target-user")}</div>
-          <div style="width:190px">{app.translator.trans("ziven-transfer-money.forum.transfer-list-assign-at")}</div>
-          <div style="width:85px">{app.translator.trans("ziven-transfer-money.forum.transfer-list-transfer-amount")}</div>
         </div>
         <ul style="margin: 0;padding: 0;list-style-type: none;position: relative;">
           {this.transferHistory.map((transferHistory) => {
             return (
-              <li key={transferHistory.id()} data-id={transferHistory.id()}>
+              <li style="padding-top:5px" key={transferHistory.id()} data-id={transferHistory.id()}>
                 {TransferHistoryListItem.component({ transferHistory })}
               </li>
             );

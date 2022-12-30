@@ -7,6 +7,11 @@ use Ziven\transferMoney\Controller\ListTransferMoneyHistoryController;
 use Ziven\transferMoney\Controller\TransferMoneyController;
 use Ziven\transferMoney\Notification\TransferMoneyBlueprint;
 use Ziven\transferMoney\Serializer\TransferMoneySerializer;
+use Ziven\transferMoney\Gambits\AllowsPdGambit;
+
+use Flarum\User\Search\UserSearcher;
+use Flarum\User\User;
+
 $extend = [
     (new Extend\Frontend('admin'))->js(__DIR__.'/js/dist/admin.js'),
     (new Extend\Frontend('forum'))->js(__DIR__ . '/js/dist/forum.js')->css(__DIR__.'/less/forum.less'),
@@ -22,6 +27,8 @@ $extend = [
     (new Extend\Notification())
         ->type(TransferMoneyBlueprint::class, TransferMoneySerializer::class, ['alert']),
 
+    (new Extend\SimpleFlarumSearch(UserSearcher::class))
+        ->addGambit(AllowsPdGambit::class),
 ];
 
 return $extend;

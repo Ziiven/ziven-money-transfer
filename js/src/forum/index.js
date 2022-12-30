@@ -1,6 +1,7 @@
 import { extend } from 'flarum/extend';
 import UserControls from 'flarum/utils/UserControls';
 import NotificationGrid from "flarum/components/NotificationGrid";
+import SessionDropdown from 'flarum/forum/components/SessionDropdown';
 import Button from 'flarum/components/Button';
 
 import TransferMoney from "./model/TransferMoney";
@@ -39,5 +40,23 @@ app.initializers.add('ziven-money-transfer', () => {
         );
       }
     }
+  });
+
+  extend(SessionDropdown.prototype, 'items', function (items) {
+    if (!app.session.user) return;
+
+    items.add(
+      'transferMoney',
+      Button.component(
+        {
+          icon: 'fas fa-money-bill',
+          onclick: () => {
+            app.modal.show(TransferMoneyModal)
+          },
+        },
+        app.translator.trans('ziven-transfer-money.forum.transfer-money')
+      ),
+      -1
+    );
   });
 });

@@ -10,26 +10,28 @@ export default function () {
   };
 
   extend(UserPage.prototype, "navItems", function (items,user) {
-      const currentUserID = app.session.user.id();
-      const targetUserID = this.user.id();
+      if(app.session.user){
+        const currentUserID = app.session.user.id();
+        const targetUserID = this.user.id();
 
-      if(currentUserID==targetUserID){
-        items.add(
-          "transferMoney",
-          LinkButton.component({
-              href: app.route("user.transferHistory", {
-                username: this.user.username(),
-              }),
-              icon: "fas fa-money-bill",
-            },
-            [
-              app.translator.trans(
-                "ziven-transfer-money.forum.transfer-money-history"
-              )
-            ]
-          ),
-          10
-        );
+        if(currentUserID==targetUserID){
+          items.add(
+            "transferMoney",
+            LinkButton.component({
+                href: app.route("user.transferHistory", {
+                  username: this.user.username(),
+                }),
+                icon: "fas fa-money-bill",
+              },
+              [
+                app.translator.trans(
+                  "ziven-transfer-money.forum.transfer-money-history"
+                )
+              ]
+            ),
+            10
+          );
+        }
       }
   });
 }

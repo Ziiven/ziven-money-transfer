@@ -30,41 +30,54 @@ class TransferMoneyController extends AbstractCreateController{
 
     protected function data(ServerRequestInterface $request, Document $document){
         $requestData = $request->getParsedBody()['data']['attributes'];
-        $moneyTransfer = $requestData['moneyTransfer'];
-        $targetUserID = $requestData['targetUserID'];
+        $moneyTransfer = floatval($requestData['moneyTransfer']);
+        $moneyTransferNotes = trim($requestData['moneyTransferNotes']);
+        $selectedUsers = json_decode($requestData['selectedUsers']);
+        $moneyTransferTotalUser = count($selectedUsers);
         $currentUserID = $request->getAttribute('actor')->id;
         $errorMessage = "";
 
-        if(!isset($moneyTransfer) || $targetUserID==$currentUserID || $moneyTransfer<=0){
+        if(!isset($moneyTransfer) || array_search($currentUserID, $selectedUsers)!==false || $moneyTransfer<=0 || $moneyTransferTotalUser===0){
             $errorMessage = 'ziven-transfer-money.forum.transfer-error';
         }else{
             $currentUserData = User::find($currentUserID);
             $allowUseTranferMoney = $request->getAttribute('actor')->can('transferMoney.allowUseTranferMoney', $currentUserData);
 
             if($allowUseTranferMoney){
-                $currentUserMoneyRemain = $currentUserData->money-$moneyTransfer;
-                $targetUserData = User::find($targetUserID);
+                $currentUserMoneyRemain = $currentUserData->money-($moneyTransfer*$moneyTransferTotalUser);
+                $selectedUsersDataCount = User::find($selectedUsers)->count();
 
-                if($currentUserMoneyRemain<0){
-                    $errorMessage = 'ziven-transfer-money.forum.transfer-error-insufficient-fund';
+                if($selectedUsersDataCount===$moneyTransferTotalUser){
+                    if($currentUserMoneyRemain<0){
+                        $errorMessage = 'ziven-transfer-money.forum.transfer-error-insufficient-fund';
+                    }else{
+                        $currentUserData->money = $currentUserMoneyRemain;
+                        $currentUserData->save();
+
+                        foreach($selectedUsers as $targetUserID) {
+                            $transferMoney = new TransferMoney();
+                            $transferMoney->from_user_id = $currentUserID;
+                            $transferMoney->target_user_id = $targetUserID;
+                            $transferMoney->transfer_money_value = $moneyTransfer;
+                            $transferMoney->assigned_at = Carbon::now('Asia/Shanghai');
+
+                            if(!empty($moneyTransferNotes)){
+                                $transferMoney->notes = $moneyTransferNotes;
+                            }
+
+                            $transferMoney->save();
+
+                            $targetUserData = User::find($targetUserID);
+                            $targetUserData->money+=$moneyTransfer;
+                            $targetUserData->save();
+
+                            $this->notifications->sync(new TransferMoneyBlueprint($transferMoney),[$targetUserData]);
+                        }
+
+                        return $currentUserData;
+                    }
                 }else{
-                    $transferMoney = new TransferMoney();
-                    $transferMoney->from_user_id = $currentUserID;
-                    $transferMoney->target_user_id = $targetUserID;
-                    $transferMoney->transfer_money_value = $moneyTransfer;
-                    $transferMoney->assigned_at = Carbon::now('Asia/Shanghai');
-                    $transferMoney->save();
-
-                    $currentUserData->money = $currentUserMoneyRemain;
-                    $currentUserData->save();
-
-                    $targetUserData = User::find($targetUserID);
-                    $targetUserData->money+=$moneyTransfer;
-                    $targetUserData->save();
-
-                    $this->notifications->sync(new TransferMoneyBlueprint($transferMoney),[$targetUserData]);
-
-                    return $transferMoney;
+                    $errorMessage = 'ziven-transfer-money.forum.transfer-error';
                 }
             }else{
                 $errorMessage = 'ziven-transfer-money.forum.transfer-error-no-permission';
