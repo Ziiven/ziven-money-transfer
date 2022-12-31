@@ -78,6 +78,10 @@ export default class TransferMoneyModal extends Modal {
                 loading: this.loading,
                 onclick: () => {
                   this.hide();
+
+                  if(typeof(this.attrs.callback)==="function"){
+                    this.attrs.callback();
+                  }
                 }
               },
               app.translator.trans('ziven-transfer-money.forum.cancel')
@@ -138,6 +142,10 @@ export default class TransferMoneyModal extends Modal {
             app.store.pushPayload(payload);
             app.modal.show(TransferMoneySuccessModal);
             this.loading = false;
+            
+            if(typeof(this.attrs.callback)==="function"){
+              this.attrs.callback();
+            }
           }
         )
         .catch((e) => {

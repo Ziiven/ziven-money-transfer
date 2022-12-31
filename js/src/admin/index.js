@@ -1,7 +1,9 @@
 import {extend, override} from 'flarum/extend';
+import SettingsPage from './components/SettingsPage';
 
 app.initializers.add('ziven-money-transfer', () => {
   app.extensionData.for('ziiven-money-transfer')
+  .registerPage(SettingsPage)
   .registerPermission(
     {
       icon: 'fas fa-exchange-alt',

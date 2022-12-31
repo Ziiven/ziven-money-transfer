@@ -5,6 +5,67 @@
 .transferMoneyButton--gray:active {background-color:#c6c6c6;}
 .transferMoneyButton--gray:disabled {background-color:#eee;}
 
+#avatarClone{
+    right:-7px;
+    .username{
+        display:none;
+    }
+}
+
+.clientCustomizeTransferMoneyButtonContainer{
+    position: absolute;
+    left: 45px;
+    margin-top:10px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    color: var(--header-color);
+}
+
+.clientCustomizeTransferMoneyHeaderText{
+    max-width: 141px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0px 6px 0px 10px;
+    display: inline-block;
+}
+
+.clientCustomizeTransferMoneyHeaderItems{
+    display: inline-block;
+    padding: 0px 5px;
+}
+
+.clientCustomizeTransferMoneyHeaderTansferMoney{ 
+    background: rgba(255,255,255,.15);
+    border-radius: 14px;
+    font-size: 12px;
+    padding: 4px 8px;
+    margin-left: 8px;
+}
+
+.clientCustomizeTransferMoneyHeaderIcon{
+    display: inline-block;
+    background: orange;
+    padding: 4px;
+    border-radius: 14px;
+    width: 34px;
+    text-align: center;
+}
+
+.clientCustomizeTransferMoneyHeaderUser{
+    margin-left: 2px;
+}
+
+.clientCustomizeTransferMoneyHeaderTotalMoney{
+    background: rgba(255,255,255,.15);
+    border-radius: 14px;
+    font-size: 12px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+}
+
 .transferHistoryUser {
 	.Avatar {
 	  .Avatar--size(24px);

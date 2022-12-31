@@ -8,12 +8,15 @@ import TransferMoney from "./model/TransferMoney";
 import TransferMoneyModal from './components/TransferMoneyModal';
 import TransferMoneyNotification from "./components/TransferMoneyNotification";
 import addTransferMoneyPage from "./addTransferMoneyPage";
+import addClient1CustomizationFeatures from "./addClient1CustomizationFeatures";
+
 
 app.initializers.add('ziven-money-transfer', () => {
   app.store.models.transferMoney = TransferMoney;
   app.notificationComponents.transferMoney = TransferMoneyNotification;
 
   addTransferMoneyPage();
+  addClient1CustomizationFeatures();
 
   extend(NotificationGrid.prototype, "notificationTypes", function (items) {
     items.add("transferMoney", {
@@ -43,7 +46,9 @@ app.initializers.add('ziven-money-transfer', () => {
   });
 
   extend(SessionDropdown.prototype, 'items', function (items) {
-    if (!app.session.user) return;
+    if (!app.session.user) {
+      return;
+    }
 
     items.add(
       'transferMoney',

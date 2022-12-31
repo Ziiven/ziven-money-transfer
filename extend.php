@@ -29,6 +29,9 @@ $extend = [
 
     (new Extend\SimpleFlarumSearch(UserSearcher::class))
         ->addGambit(AllowsPdGambit::class),
+
+    (new Extend\Settings())
+        ->serializeToForum('moneyTransferClient1Customization', 'moneyTransfer.moneyTransferClient1Customization'),
 ];
 
 return $extend;
