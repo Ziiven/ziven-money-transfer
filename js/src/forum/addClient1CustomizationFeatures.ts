@@ -1,5 +1,4 @@
 import { extend } from "flarum/extend";
-import IndexPage from 'flarum/forum/components/IndexPage';
 import SessionDropdown from 'flarum/forum/components/SessionDropdown';
 import TransferMoneyModal from './components/TransferMoneyModal';
 
@@ -28,7 +27,7 @@ function attachTransferMoneyMenu(vdom: Vnode<any>, user: User): void {
   if(isMobileView===false){ return; }
   if(moneyTransferClient1Customization!=='1'){ return; }
 
-  $("#content .IndexPage-nav .item-nav").remove();
+  $("#content .IndexPage-nav .item-nav").css("display","none");
   $("#content .IndexPage-nav .item-newDiscussion").remove();
 
   let task = setInterval(function(){
@@ -36,7 +35,7 @@ function attachTransferMoneyMenu(vdom: Vnode<any>, user: User): void {
       clearInterval(task);
 
       if(vdom.dom!==undefined){
-        $("#content .IndexPage-nav .item-nav").remove();
+        $("#content .IndexPage-nav .item-nav").css("display","none");
         $("#content .IndexPage-nav .item-newDiscussion").remove();
 
         let transferMoneyLabelContainer = document.getElementById("transferMoneyLabelContainer");
@@ -45,13 +44,16 @@ function attachTransferMoneyMenu(vdom: Vnode<any>, user: User): void {
           return;
         }
 
-        $("#itemNavClone").remove();
         $("#content .IndexPage-nav .item-nav .ButtonGroup").removeClass("App-titleControl");
         $("#content .IndexPage-nav .item-nav .ButtonGroup button").addClass("Button--link");
         let itemNav = $("#content .IndexPage-nav .item-nav").clone();
 
-        $(itemNav).attr('id',"itemNavClone");
-        $("#header-secondary .Header-controls").prepend(itemNav);
+        if(itemNav.length>0){
+          $("#itemNavClone").remove();
+          $(itemNav).attr('id',"itemNavClone");
+          $(itemNav).css('display',"");
+          $("#header-secondary .Header-controls").prepend(itemNav);
+        }
 
         const appNavigation = document.getElementById("app-navigation");
         const moneyName = app.forum.attribute('antoinefr-money.moneyname') || '[money]';
@@ -123,11 +125,4 @@ export default function () {
       }
     }
   });
-
-  extend(IndexPage.prototype, 'view', function(vnode) {
-    if (!app.session.user) {
-      return;
-    }
-
-  })
 }
