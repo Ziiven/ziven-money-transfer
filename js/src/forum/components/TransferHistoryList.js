@@ -5,7 +5,7 @@ import Button from "flarum/components/Button";
 
 import TransferHistoryListItem from "./TransferHistoryListItem";
 
-export default class WarningList extends Component {
+export default class TransferHistoryList extends Component {
   oninit(vnode) {
     super.oninit(vnode);
     this.loading = true;
@@ -56,7 +56,7 @@ export default class WarningList extends Component {
 
   loadMore() {
     this.loading = true;
-    this.loadResults(this.transferHistory.length).then(this.parseResults.bind(this));
+    this.loadResults(this.transferHistory.length);
   }
 
   parseResults(results) {

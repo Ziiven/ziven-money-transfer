@@ -17,6 +17,14 @@ export default class SettingsPage extends ExtensionPage {
             help:app.translator.trans('ziven-transfer-money.admin.transfer-money-client-customization-help')
           })}
 
+          {this.buildSettingComponent({
+            type: 'string',
+            setting: 'moneyTransfer.moneyTransferTimeZone',
+            label: app.translator.trans('ziven-transfer-money.admin.transfer-money-timezone'),
+            help: app.translator.trans('ziven-transfer-money.admin.transfer-money-timezone-help'),
+            placeholder:app.translator.trans('ziven-transfer-money.admin.transfer-money-timezone-default')
+          })}
+
           <div className="Form-group">{this.submitButton()}</div>
         </div>
       </div>

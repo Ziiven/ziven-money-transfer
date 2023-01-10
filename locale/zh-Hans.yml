@@ -38,6 +38,9 @@ ziven-transfer-money:
       user-transfer-money-to-you: "{username} 向您转账"
       user-transfer-money-details: "向您支付 {cost}，转账ID：{id}"
   admin:
+    transfer-money-timezone: 时区设置
+    transfer-money-timezone-help: 设置时区。默认为 "Asia/Shanghai"
+    transfer-money-timezone-default: Asia/Shanghai
     transfer-money-client-customization: 客户定制功能
     transfer-money-client-customization-help: 为客户定制的专属功能。其他用户激活可能会出现未知错误。
     permission:

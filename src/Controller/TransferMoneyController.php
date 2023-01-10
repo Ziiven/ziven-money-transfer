@@ -51,6 +51,13 @@ class TransferMoneyController extends AbstractCreateController{
                     if($currentUserMoneyRemain<0){
                         $errorMessage = 'ziven-transfer-money.forum.transfer-error-insufficient-fund';
                     }else{
+                        $defaultTimezone = 'Asia/Shanghai';
+                        $settingTimezone = $this->settings->get('moneyTransfer.moneyTransferTimeZone', $defaultTimezone);
+
+                        if(!in_array($settingTimezone, timezone_identifiers_list())) {
+                            $settingTimezone = $defaultTimezone;
+                        }
+
                         $currentUserData->money = $currentUserMoneyRemain;
                         $currentUserData->save();
 
@@ -59,7 +66,7 @@ class TransferMoneyController extends AbstractCreateController{
                             $transferMoney->from_user_id = $currentUserID;
                             $transferMoney->target_user_id = $targetUserID;
                             $transferMoney->transfer_money_value = $moneyTransfer;
-                            $transferMoney->assigned_at = Carbon::now('Asia/Shanghai');
+                            $transferMoney->assigned_at = Carbon::now($settingTimezone);
 
                             if(!empty($moneyTransferNotes)){
                                 $transferMoney->notes = $moneyTransferNotes;

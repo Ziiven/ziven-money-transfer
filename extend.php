@@ -31,7 +31,8 @@ $extend = [
         ->addGambit(AllowsPdGambit::class),
 
     (new Extend\Settings())
-        ->serializeToForum('moneyTransferClient1Customization', 'moneyTransfer.moneyTransferClient1Customization'),
+        ->serializeToForum('moneyTransferClient1Customization', 'moneyTransfer.moneyTransferClient1Customization')
+        ->serializeToForum('moneyTransferTimeZone', 'moneyTransfer.moneyTransferTimeZone'),
 ];
 
 return $extend;
