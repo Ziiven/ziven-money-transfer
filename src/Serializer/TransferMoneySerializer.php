@@ -15,8 +15,13 @@ class TransferMoneySerializer extends AbstractSerializer{
             'notes' => $data->notes,
             'target_user_id' => $data->target_user_id,
             'transfer_money_value' => $data->transfer_money_value,
-            'assigned_at' => date("Y-m-d H:i:s", strtotime($data->assigned_at))
+            // 'assigned_at' => date("Y-m-d H:i:s", strtotime($data->assigned_at)),
+            'assigned_at' => null
         ];
+
+        if (!empty($data->assigned_at)) {
+            $attributes['assigned_at'] = date("Y-m-d H:i:s", strtotime($data->assigned_at));
+        }
 
         return $attributes;
     }
